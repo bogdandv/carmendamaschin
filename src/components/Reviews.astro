@@ -1,0 +1,83 @@
+---
+const reviews = [
+  {
+    name: "Ana M.",
+    quote: "Profesionalism și atenție la detalii. Am apreciat răspunsul rapid și clar.",
+  },
+  {
+    name: "Cristian P.",
+    quote: "Soluții simple, rapide și foarte bine structurate. Recomand cu încredere.",
+  },
+  {
+    name: "Laura V.",
+    quote: "O colaborare excelentă, cu comunicare transparentă și rezultate de calitate.",
+  },
+];
+---
+
+<section id="reviews" class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+  <div>
+    <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Recenzii</p>
+    <h2 class="mt-2 text-3xl font-semibold text-slate-900">Ce spun clienții noștri</h2>
+  </div>
+
+  <div class="mt-6 rounded-2xl bg-slate-50 p-6" data-review-carousel>
+    {reviews.map((review, index) => (
+      <div class={index === 0 ? "block" : "hidden"} data-review-card>
+        <p class="text-lg leading-8 text-slate-700">“{review.quote}”</p>
+        <p class="mt-4 font-semibold text-slate-900">{review.name}</p>
+      </div>
+    ))}
+
+    <div class="mt-6 flex items-center justify-between gap-4">
+      <div class="flex gap-2" data-review-dots>
+        {reviews.map((_, index) => (
+          <button
+            type="button"
+            class={index === 0 ? "h-2.5 w-2.5 rounded-full bg-slate-900" : "h-2.5 w-2.5 rounded-full bg-slate-300"}
+            data-review-dot
+            aria-label={`Go to review ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      <div class="flex gap-2">
+        <button type="button" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200" data-review-prev>Anterior</button>
+        <button type="button" class="rounded-full border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-200" data-review-next>Următorul</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const cards = Array.from(document.querySelectorAll('[data-review-card]'));
+  const dots = Array.from(document.querySelectorAll('[data-review-dot]'));
+  const prev = document.querySelector('[data-review-prev]');
+  const next = document.querySelector('[data-review-next]');
+
+  if (cards.length && dots.length && prev && next) {
+    let activeIndex = 0;
+
+    const showReview = (index) => {
+      activeIndex = (index + cards.length) % cards.length;
+
+      cards.forEach((card, cardIndex) => {
+        card.classList.toggle('hidden', cardIndex !== activeIndex);
+        card.classList.toggle('block', cardIndex === activeIndex);
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle('bg-slate-900', dotIndex === activeIndex);
+        dot.classList.toggle('bg-slate-300', dotIndex !== activeIndex);
+      });
+    };
+
+    prev.addEventListener('click', () => showReview(activeIndex - 1));
+    next.addEventListener('click', () => showReview(activeIndex + 1));
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => showReview(index));
+    });
+
+    showReview(0);
+  }
+</script>

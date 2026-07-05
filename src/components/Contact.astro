@@ -1,0 +1,41 @@
+---
+const phone = "0740.011.793";
+const email = "carmendamaschin@gmail.com";
+const address = "Bulevardul Mihai Eminescu 91, 710369 Botoșani, România";
+const mapUrl = "https://www.google.com/maps?q=Cabinet-Expert-Contabil-Damaschin-Carmen&output=embed";
+---
+
+<section id="contact" class="rounded-3xl border border-slate-200 bg-slate-900 p-8 text-white shadow-sm">
+  <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Contact</p>
+      <h2 class="mt-4 text-3xl font-semibold">Suntem aici pentru tine</h2>
+      <p class="mt-4 text-lg leading-8 text-slate-300">Poți să ne scrii sau să ne suni pentru o discuție rapidă despre proiectul sau nevoile tale.</p>
+
+      <div class="mt-6 space-y-3 text-slate-300">
+        <p><span class="font-semibold text-white">Telefon:</span> {phone} (disponibil și pe <span class="text-emerald-400">WhatsApp</span>)</p>
+        <p>
+          <span class="font-semibold text-white">Email:</span>
+          <span class="ml-1">
+            <a href={`mailto:${email}`} class="underline-offset-4 hover:underline">
+              {email}
+            </a>
+          </span>
+        </p>
+        <p><span class="font-semibold text-white">Adresă:</span> {address}</p>
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-2xl border border-white/10">
+      <iframe
+        src={mapUrl}
+        width="100%"
+        height="320"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      />
+    </div>
+  </div>
+</section>

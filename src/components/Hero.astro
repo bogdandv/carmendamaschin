@@ -1,0 +1,25 @@
+---
+const {
+  title = "Nume firma aici",
+  subtitle = "Firmă dedicată soluțiilor clare, rapide și profesionale pentru clienții noștri.",
+  logoText = "NF",
+} = Astro.props;
+---
+
+<section id="hero" class="grid gap-8 rounded-3xl bg-slate-900 px-8 py-10 text-white shadow-xl lg:grid-cols-[1.3fr_0.7fr] lg:px-12">
+  <div class="space-y-6">
+    <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Servicii profesionale</p>
+    <h1 class="text-4xl font-semibold sm:text-5xl">{title}</h1>
+    <p class="max-w-2xl text-lg text-slate-300">{subtitle}</p>
+    <div class="flex flex-wrap gap-3">
+      <a href="#contact" class="rounded-full bg-white px-5 py-3 font-medium text-slate-900 transition hover:bg-slate-200">Contactează-ne</a>
+      <a href="#services" class="rounded-full border border-slate-700 px-5 py-3 font-medium text-white transition hover:bg-slate-800">Vezi serviciile</a>
+    </div>
+  </div>
+
+  <div class="flex flex-col justify-center rounded-3xl border border-white/10 bg-white/10 p-8 backdrop-blur">
+    <div class="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-white text-4xl font-semibold text-slate-900">{logoText}</div>
+    <h2 class="text-xl font-semibold">Logo și identitate</h2>
+    <p class="mt-2 text-sm leading-6 text-slate-300">Înlocuiește acest spațiu cu logo-ul real al firmei pentru o primă impresie modernă.</p>
+  </div>
+</section>

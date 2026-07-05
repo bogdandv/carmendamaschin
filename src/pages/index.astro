@@ -1,17 +1,18 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Services from '../components/Services.astro';
+import Reviews from '../components/Reviews.astro';
+import Contact from '../components/Contact.astro';
 ---
-<!doctype html>
-<html lang="ro">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Nume firma aici</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+
+<Layout title="Nume firma aici">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 py-4">
+        <Hero title="Nume firma aici" subtitle="Firmă dedicată soluțiilor clare, rapide și profesionale pentru clienții noștri." logoText="NF" />
+        <About />
+        <Services />
+        <Reviews />
+        <Contact />
+    </div>
+</Layout>
