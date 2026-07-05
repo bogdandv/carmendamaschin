@@ -1,25 +1,41 @@
 ---
+import logo from '../assets/CD.png';
+
 const {
-  title = "Nume firma aici",
-  subtitle = "Firmă dedicată soluțiilor clare, rapide și profesionale pentru clienții noștri.",
-  logoText = "NF",
+  title = "CARMEN DAMASCHIN",
+  subtitle1 = "Expert Contabil",
+  subtitle2 = "Expert Judiciar",
+  subtitle3 = "Inspector Resurse Umane",
 } = Astro.props;
 ---
 
-<section id="hero" class="grid gap-8 rounded-3xl bg-slate-900 px-8 py-10 text-white shadow-xl lg:grid-cols-[1.3fr_0.7fr] lg:px-12">
+<section id="hero" class="grid gap-8 rounded-3xl bg-gradient-to-br from-[#24112f] via-[#3f2560] to-[#1a0f24] px-8 py-10 text-[#fdf7ed] shadow-[0_20px_60px_rgba(0,0,0,0.25)] lg:grid-cols-[1.3fr_0.7fr] lg:px-12">
   <div class="space-y-6">
-    <p class="text-sm uppercase tracking-[0.3em] text-slate-300">Servicii profesionale</p>
-    <h1 class="text-4xl font-semibold sm:text-5xl">{title}</h1>
-    <p class="max-w-2xl text-lg text-slate-300">{subtitle}</p>
+    <p class="text-sm uppercase tracking-[0.3em] text-[#f28c4b]">Servicii profesionale</p>
+    <h1 class="text-4xl font-semibold text-white sm:text-5xl">{title}</h1>
+
+    <ul class="space-y-3 text-lg text-[#f3e8f6]">
+      <li class="flex items-start gap-3">
+        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
+        <span>{subtitle1}</span>
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
+        <span>{subtitle2}</span>
+      </li>
+      <li class="flex items-start gap-3">
+        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
+        <span>{subtitle3}</span>
+      </li>
+    </ul>
+
     <div class="flex flex-wrap gap-3">
-      <a href="#contact" class="rounded-full bg-white px-5 py-3 font-medium text-slate-900 transition hover:bg-slate-200">Contactează-ne</a>
-      <a href="#services" class="rounded-full border border-slate-700 px-5 py-3 font-medium text-white transition hover:bg-slate-800">Vezi serviciile</a>
+      <a href="#contact" class="rounded-full bg-[#f26622] px-5 py-3 font-medium text-[#24112f] transition hover:bg-[#ff7a35]">Contactează-ne</a>
+      <a href="#services" class="rounded-full border border-[#f26622]/70 px-5 py-3 font-medium text-[#fdf7ed] transition hover:bg-[#4b2a5f]">Vezi serviciile</a>
     </div>
   </div>
 
-  <div class="flex flex-col justify-center rounded-3xl border border-white/10 bg-white/10 p-8 backdrop-blur">
-    <div class="mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-white text-4xl font-semibold text-slate-900">{logoText}</div>
-    <h2 class="text-xl font-semibold">Logo și identitate</h2>
-    <p class="mt-2 text-sm leading-6 text-slate-300">Înlocuiește acest spațiu cu logo-ul real al firmei pentru o primă impresie modernă.</p>
+  <div class="flex flex-col items-center justify-center rounded-3xl border border-[#f28c4b]/30 bg-[#f8efe8]/10 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] backdrop-blur">
+    <img src={logo.src} alt="Carmen Damaschin logo" class="w-full max-w-[260px] rounded-2xl object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.28)]" />
   </div>
 </section>
