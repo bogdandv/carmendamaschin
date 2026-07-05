@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+  --brand-purple: #3f2560;
+  --brand-purple-dark: #24112f;
+  --brand-orange: #f26622;
+  --brand-cream: #fdf7ed;
+  --brand-bg: #efe3ef;
+  --brand-surface: #f8f0f8;
+  --brand-accent: #f7d8c2;
+}
+
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--brand-bg);
+  color: var(--brand-purple-dark);
 }

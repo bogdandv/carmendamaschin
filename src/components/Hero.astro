@@ -9,12 +9,12 @@ const {
 } = Astro.props;
 ---
 
-<section id="hero" class="grid gap-8 rounded-3xl bg-gradient-to-br from-[#24112f] via-[#3f2560] to-[#1a0f24] px-8 py-10 text-[#fdf7ed] shadow-[0_20px_60px_rgba(0,0,0,0.25)] lg:grid-cols-[1.3fr_0.7fr] lg:px-12">
-  <div class="space-y-6">
+<section id="hero" class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#24112f] via-[#3f2560] to-[#1a0f24] px-8 py-10 text-[#fdf7ed] shadow-[0_20px_60px_rgba(0,0,0,0.25)] xl:grid xl:grid-cols-[1.25fr_0.75fr] xl:px-12">
+  <div class="relative z-10 space-y-6">
     <p class="text-sm uppercase tracking-[0.3em] text-[#f28c4b]">Servicii profesionale</p>
-    <h1 class="text-4xl font-semibold text-white sm:text-5xl">{title}</h1>
+    <h1 class="text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-tight text-white">{title}</h1>
 
-    <ul class="space-y-3 text-lg text-[#f3e8f6]">
+    <ul class="space-y-3 text-base text-[#f3e8f6] sm:text-lg">
       <li class="flex items-start gap-3">
         <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
         <span>{subtitle1}</span>
@@ -35,7 +35,9 @@ const {
     </div>
   </div>
 
-  <div class="flex flex-col items-center justify-center rounded-3xl border border-[#f28c4b]/30 bg-[#f8efe8]/10 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] backdrop-blur">
-    <img src={logo.src} alt="Carmen Damaschin logo" class="w-full max-w-[260px] rounded-2xl object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.28)]" />
+  <div class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-22 sm:opacity-25 xl:static xl:z-auto xl:opacity-100 xl:justify-end">
+    <div class="flex h-full w-full flex-col items-center justify-center rounded-3xl border border-[#f28c4b]/20 bg-[#f8efe8]/10 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] backdrop-blur xl:h-auto xl:w-full">
+      <img src={logo.src} alt="Carmen Damaschin logo" class="w-full max-w-[300px] rounded-2xl object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.28)] sm:max-w-[340px] xl:max-w-[280px]" />
+    </div>
   </div>
 </section>
