@@ -1,5 +1,5 @@
 ---
-import logo from '../assets/CD.png';
+import logo from '../assets/CD1.png';
 
 const {
   title = "CARMEN DAMASCHIN",
@@ -9,35 +9,35 @@ const {
 } = Astro.props;
 ---
 
-<section id="hero" class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#24112f] via-[#3f2560] to-[#1a0f24] px-8 py-10 text-[#fdf7ed] shadow-[0_20px_60px_rgba(0,0,0,0.25)] xl:grid xl:grid-cols-[1.25fr_0.75fr] xl:px-12">
+<section id="hero" class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0f1c49] via-[#273A96] to-[#16286a] px-8 py-10 text-[#fff9e7] shadow-[0_20px_60px_rgba(23,37,95,0.24)] xl:grid xl:grid-cols-[1.25fr_0.75fr] xl:px-12">
   <div class="relative z-10 space-y-6">
-    <p class="text-sm uppercase tracking-[0.3em] text-[#f28c4b]">Servicii profesionale</p>
+    <p class="text-sm uppercase tracking-[0.3em] text-[#F8BF16]">Servicii profesionale</p>
     <h1 class="text-[clamp(2rem,4.5vw,3.6rem)] font-semibold leading-tight text-white">{title}</h1>
 
-    <ul class="space-y-3 text-base text-[#f3e8f6] sm:text-lg">
+    <ul class="space-y-3 text-base text-[#f7f1d5] sm:text-lg">
       <li class="flex items-start gap-3">
-        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
+        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#F8BF16]"></span>
         <span>{subtitle1}</span>
       </li>
       <li class="flex items-start gap-3">
-        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
+        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#F8BF16]"></span>
         <span>{subtitle2}</span>
       </li>
       <li class="flex items-start gap-3">
-        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#f26622]"></span>
+        <span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#F8BF16]"></span>
         <span>{subtitle3}</span>
       </li>
     </ul>
 
     <div class="flex flex-wrap gap-3">
-      <a href="#contact" class="rounded-full bg-[#f26622] px-5 py-3 font-medium text-[#24112f] transition hover:bg-[#ff7a35]">Contactează-ne</a>
-      <a href="#services" class="rounded-full border border-[#f26622]/70 px-5 py-3 font-medium text-[#fdf7ed] transition hover:bg-[#4b2a5f]">Vezi serviciile</a>
+      <a href="#contact" class="rounded-full bg-[#F8BF16] px-5 py-3 font-medium text-[#15224f] transition hover:bg-[#ffca3b]">Contactează-ne</a>
+      <a href="#services" class="rounded-full border border-[#F8BF16]/70 px-5 py-3 font-medium text-[#fff9e7] transition hover:bg-[#1b2f7e]">Vezi serviciile</a>
     </div>
   </div>
 
   <div class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-22 sm:opacity-25 xl:static xl:z-auto xl:opacity-100 xl:justify-end">
-    <div class="flex h-full w-full flex-col items-center justify-center rounded-3xl border border-[#f28c4b]/20 bg-[#f8efe8]/10 p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.16)] backdrop-blur xl:h-auto xl:w-full">
-      <img src={logo.src} alt="Carmen Damaschin logo" class="w-full max-w-[300px] rounded-2xl object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.28)] sm:max-w-[340px] xl:max-w-[280px]" />
+    <div class="flex h-full w-full flex-col items-center justify-center rounded-3xl border border-[#F8BF16]/20 bg-[#dce7ff] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur xl:h-auto xl:w-full">
+      <img src={logo.src} alt="Carmen Damaschin logo" class="w-full max-w-[300px] rounded-2xl object-contain bg-[#dce7ff] sm:max-w-[340px] xl:max-w-[280px]" />
     </div>
   </div>
 </section>

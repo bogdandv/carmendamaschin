@@ -15,17 +15,17 @@ const reviews = [
 ];
 ---
 
-<section id="reviews" class="rounded-3xl border border-[#3f2560]/10 bg-[#f8f0f8] p-8 shadow-[0_16px_40px_rgba(36,17,47,0.06)]">
+<section id="reviews" class="rounded-3xl border border-[#273A96]/10 bg-[#f4f7ff] p-8 shadow-[0_16px_40px_rgba(23,37,95,0.06)]">
   <div>
-    <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#f26622]">Recenzii</p>
-    <h2 class="mt-2 text-3xl font-semibold text-[#24112f]">Ce spun clienții noștri</h2>
+    <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#F8BF16]">Recenzii</p>
+    <h2 class="mt-2 text-3xl font-semibold text-[#15224f]">Ce spun clienții noștri</h2>
   </div>
 
-  <div class="mt-6 rounded-2xl border border-[#3f2560]/10 bg-[#f8f0f8] p-6" data-review-carousel>
+  <div class="mt-6 rounded-2xl border border-[#273A96]/10 bg-[#eef4ff] p-6" data-review-carousel>
     {reviews.map((review, index) => (
       <div class={index === 0 ? "block" : "hidden"} data-review-card>
-        <p class="text-lg leading-8 text-[#4b355d]">“{review.quote}”</p>
-        <p class="mt-4 font-semibold text-[#24112f]">{review.name}</p>
+        <p class="text-lg leading-8 text-[#31457f]">“{review.quote}”</p>
+        <p class="mt-4 font-semibold text-[#15224f]">{review.name}</p>
       </div>
     ))}
 
@@ -34,7 +34,7 @@ const reviews = [
         {reviews.map((_, index) => (
           <button
             type="button"
-            class={index === 0 ? "h-2.5 w-2.5 rounded-full bg-[#3f2560]" : "h-2.5 w-2.5 rounded-full bg-[#d9c8df]"}
+            class={index === 0 ? "h-2.5 w-2.5 rounded-full bg-[#273A96]" : "h-2.5 w-2.5 rounded-full bg-[#dce7ff]"}
             data-review-dot
             aria-label={`Go to review ${index + 1}`}
           />
@@ -42,8 +42,8 @@ const reviews = [
       </div>
 
       <div class="flex gap-2">
-        <button type="button" class="rounded-full border border-[#3f2560]/20 px-4 py-2 text-sm font-medium text-[#3f2560] transition hover:bg-[#efe3ef]" data-review-prev>Anterior</button>
-        <button type="button" class="rounded-full border border-[#3f2560]/20 px-4 py-2 text-sm font-medium text-[#3f2560] transition hover:bg-[#efe3ef]" data-review-next>Următorul</button>
+        <button type="button" class="rounded-full border border-[#273A96]/20 px-4 py-2 text-sm font-medium text-[#273A96] transition hover:bg-[#dce7ff]" data-review-prev>Anterior</button>
+        <button type="button" class="rounded-full border border-[#273A96]/20 px-4 py-2 text-sm font-medium text-[#273A96] transition hover:bg-[#dce7ff]" data-review-next>Următorul</button>
       </div>
     </div>
   </div>
@@ -67,8 +67,8 @@ const reviews = [
       });
 
       dots.forEach((dot, dotIndex) => {
-        dot.classList.toggle('bg-[#3f2560]', dotIndex === activeIndex);
-        dot.classList.toggle('bg-[#d9c8df]', dotIndex !== activeIndex);
+        dot.classList.toggle('bg-[#273A96]', dotIndex === activeIndex);
+        dot.classList.toggle('bg-[#dce7ff]', dotIndex !== activeIndex);
       });
     };
 
