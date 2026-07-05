@@ -1,5 +1,5 @@
 ---
-import logo from '../assets/CD1.png';
+import logo from '../assets/CD3.png';
 
 const {
   title = "CARMEN DAMASCHIN",
@@ -37,7 +37,11 @@ const {
 
   <div class="pointer-events-none absolute inset-0 z-0 flex items-center justify-center opacity-22 sm:opacity-25 xl:static xl:z-auto xl:opacity-100 xl:justify-end">
     <div class="flex h-full w-full flex-col items-center justify-center rounded-3xl p-8 xl:h-auto xl:w-full">
-      <img src={logo.src} alt="Carmen Damaschin logo" class="w-full max-w-[300px] rounded-2xl object-contain sm:max-w-[340px] xl:max-w-[280px]" />
+      <img
+        src={logo.src}
+        alt="Carmen Damaschin logo"
+        class="w-full max-w-[300px] rounded-2xl object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] sm:max-w-[340px] xl:drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] xl:max-w-[280px]"
+      />
     </div>
   </div>
 </section>
