@@ -21,63 +21,189 @@ const reviews = [
     <h2 class="mt-2 text-3xl font-semibold text-[#15224f]">Ce spun clienții noștri</h2>
   </div>
 
-  <div class="mt-6 rounded-2xl border border-[#273A96]/10 bg-[#eef4ff] p-6" data-review-carousel>
-    {reviews.map((review, index) => (
-      <div class={index === 0 ? "block" : "hidden"} data-review-card>
-        <p class="text-lg leading-8 text-[#31457f]">“{review.quote}”</p>
-        <p class="mt-4 font-semibold text-[#15224f]">{review.name}</p>
-      </div>
-    ))}
+  <div class="mt-6 flex items-center justify-center gap-4">
+    <button 
+      type="button" 
+      class="flex-shrink-0 rounded-full border border-[#273A96]/20 p-3 text-[#273A96] transition hover:bg-[#dce7ff]" 
+      data-carousel-prev
+      aria-label="Previous review">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
 
-    <div class="mt-6 flex items-center justify-between gap-4">
-      <div class="flex gap-2" data-review-dots>
-        {reviews.map((_, index) => (
-          <button
-            type="button"
-            class={index === 0 ? "h-2.5 w-2.5 rounded-full bg-[#273A96]" : "h-2.5 w-2.5 rounded-full bg-[#dce7ff]"}
-            data-review-dot
-            aria-label={`Go to review ${index + 1}`}
-          />
+    <div class="relative flex-1 overflow-hidden rounded-2xl border border-[#273A96]/10 bg-[#eef4ff]">
+      <div 
+        class="flex transition-transform duration-500 ease-out" 
+        data-carousel-track
+        style="transform: translateX(0)">
+        {reviews.map((review) => (
+          <div class="w-full flex-shrink-0 p-6">
+            <p class="text-lg leading-8 text-[#31457f]">"{review.quote}"</p>
+            <p class="mt-4 font-semibold text-[#15224f]">{review.name}</p>
+          </div>
         ))}
       </div>
-
-      <div class="flex gap-2">
-        <button type="button" class="rounded-full border border-[#273A96]/20 px-4 py-2 text-sm font-medium text-[#273A96] transition hover:bg-[#dce7ff]" data-review-prev>Anterior</button>
-        <button type="button" class="rounded-full border border-[#273A96]/20 px-4 py-2 text-sm font-medium text-[#273A96] transition hover:bg-[#dce7ff]" data-review-next>Următorul</button>
-      </div>
     </div>
+
+    <button 
+      type="button" 
+      class="flex-shrink-0 rounded-full border border-[#273A96]/20 p-3 text-[#273A96] transition hover:bg-[#dce7ff]" 
+      data-carousel-next
+      aria-label="Next review">
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mt-6 flex items-center justify-center gap-2" data-carousel-dots>
+    {reviews.map((_, index) => (
+      <button
+        type="button"
+        class={index === 0 ? "h-2.5 w-2.5 rounded-full bg-[#273A96]" : "h-2.5 w-2.5 rounded-full bg-[#dce7ff]"}
+        data-carousel-dot
+        aria-label={`Go to review ${index + 1}`}
+      />
+    ))}
   </div>
 </section>
 
 <script>
-  const cards = Array.from(document.querySelectorAll('[data-review-card]'));
-  const dots = Array.from(document.querySelectorAll('[data-review-dot]'));
-  const prev = document.querySelector('[data-review-prev]');
-  const next = document.querySelector('[data-review-next]');
+  const carousel = document.querySelector('[data-carousel-track]');
+  const prevBtn = document.querySelector('[data-carousel-prev]');
+  const nextBtn = document.querySelector('[data-carousel-next]');
+  const dots = Array.from(document.querySelectorAll('[data-carousel-dot]'));
+  const container = carousel?.parentElement?.parentElement;
 
-  if (cards.length && dots.length && prev && next) {
-    let activeIndex = 0;
+  if (carousel && prevBtn && nextBtn && container) {
+    let currentIndex = 0;
+    let autoplayInterval: NodeJS.Timeout | null = null;
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID: number | null = null;
 
-    const showReview = (index) => {
-      activeIndex = (index + cards.length) % cards.length;
+    const reviewCount = carousel.children.length;
+    const itemWidth = 100;
 
-      cards.forEach((card, cardIndex) => {
-        card.classList.toggle('hidden', cardIndex !== activeIndex);
-        card.classList.toggle('block', cardIndex === activeIndex);
-      });
+    const updateCarousel = () => {
+      const offset = -currentIndex * itemWidth;
+      carousel.style.transform = `translateX(${offset}%)`;
 
-      dots.forEach((dot, dotIndex) => {
-        dot.classList.toggle('bg-[#273A96]', dotIndex === activeIndex);
-        dot.classList.toggle('bg-[#dce7ff]', dotIndex !== activeIndex);
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('bg-[#273A96]', index === currentIndex);
+        dot.classList.toggle('bg-[#dce7ff]', index !== currentIndex);
       });
     };
 
-    prev.addEventListener('click', () => showReview(activeIndex - 1));
-    next.addEventListener('click', () => showReview(activeIndex + 1));
+    const goToSlide = (index: number) => {
+      currentIndex = ((index % reviewCount) + reviewCount) % reviewCount;
+      updateCarousel();
+      resetAutoplay();
+    };
+
+    const nextSlide = () => {
+      goToSlide(currentIndex + 1);
+    };
+
+    const prevSlide = () => {
+      goToSlide(currentIndex - 1);
+    };
+
+    const startAutoplay = () => {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(nextSlide, 5000);
+    };
+
+    const resetAutoplay = () => {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+      startAutoplay();
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayInterval) clearInterval(autoplayInterval);
+    };
+
+    const getPositionX = (e: MouseEvent | TouchEvent) => {
+      return e instanceof TouchEvent ? e.touches[0].clientX : e.clientX;
+    };
+
+    const handleDragStart = (e: MouseEvent | TouchEvent) => {
+      isDragging = true;
+      startX = getPositionX(e);
+      prevTranslate = currentIndex * -itemWidth;
+      stopAutoplay();
+
+      if (animationID) {
+        cancelAnimationFrame(animationID);
+      }
+
+      carousel.style.cursor = 'grabbing';
+    };
+
+    const handleDragMove = (e: MouseEvent | TouchEvent) => {
+      if (!isDragging) return;
+
+      const currentX = getPositionX(e);
+      currentTranslate = prevTranslate + (currentX - startX) / container.clientWidth * 100;
+
+      carousel.style.transition = 'none';
+      carousel.style.transform = `translateX(${currentTranslate}%)`;
+    };
+
+    const handleDragEnd = () => {
+      isDragging = false;
+      carousel.style.cursor = 'grab';
+
+      const movedBy = currentTranslate - prevTranslate;
+
+      if (Math.abs(movedBy) > 25) {
+        if (movedBy > 0) {
+          goToSlide(currentIndex - 1);
+        } else {
+          goToSlide(currentIndex + 1);
+        }
+      } else {
+        carousel.style.transition = 'transform 0.5s ease-out';
+        updateCarousel();
+      }
+
+      startAutoplay();
+    };
+
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+
     dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => showReview(index));
+      dot.addEventListener('click', () => goToSlide(index));
     });
 
-    showReview(0);
+    carousel.addEventListener('mousedown', handleDragStart);
+    carousel.addEventListener('mousemove', handleDragMove);
+    carousel.addEventListener('mouseup', handleDragEnd);
+    carousel.addEventListener('mouseleave', handleDragEnd);
+
+    carousel.addEventListener('touchstart', handleDragStart);
+    carousel.addEventListener('touchmove', handleDragMove);
+    carousel.addEventListener('touchend', handleDragEnd);
+
+    carousel.style.cursor = 'grab';
+
+    startAutoplay();
+
+    container.addEventListener('mouseenter', stopAutoplay);
+    container.addEventListener('mouseleave', startAutoplay);
   }
 </script>
+
+<style>
+  [data-carousel-track] {
+    cursor: grab;
+  }
+
+  [data-carousel-track]:active {
+    cursor: grabbing;
+  }
+</style>
