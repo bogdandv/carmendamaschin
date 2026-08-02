@@ -1,18 +1,41 @@
 ---
-const description = "Suntem o firmă orientată pe calitate, răspuns rapid și soluții adaptate nevoilor fiecărui client. Ne concentrăm pe transparență, profesionalism și rezultate durabile, astfel încât fiecare colaborare să se desfășoare în condiții clare și sigure.";
+const description = "O firmă de contabilitate te ajută să economisești timp, să respecti legislația și să iei decizii mai sigure pentru afacerea ta.";
 ---
 
 <section id="about" class="rounded-3xl border border-[#273A96]/10 bg-[#f4f7ff] p-8 shadow-[0_16px_40px_rgba(23,37,95,0.06)]">
-  <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#F8BF16]">Despre noi</p>
-  <div class="mt-4 grid gap-6 lg:grid-cols-[1fr_0.8fr]">
-    <div>
-      <h2 class="text-3xl font-semibold text-[#15224f]">O firmă construită pe încredere și experiență</h2>
-      <p class="mt-4 text-lg leading-8 text-[#31457f]">{description}</p>
+  <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#F8BF16]">Firma de contabilitate</p>
+  <div class="mt-4 grid gap-6 md:grid-cols-[0.8fr_1.2fr] lg:grid-cols-[0.9fr_1.1fr]">
+    <div class="flex w-full items-center justify-center overflow-hidden rounded-2xl md:ml-4 md:w-full md:max-w-[420px] md:flex-shrink-0 lg:ml-4 lg:w-full lg:max-w-[500px] lg:flex-shrink-0">
+      <img src="/src/assets/cana.jpg" alt="Diplomă" class="h-auto w-full rounded-2xl object-cover" />
     </div>
 
-    <div class="rounded-2xl border border-[#273A96]/10 bg-[#eef4ff] p-6 text-sm leading-7 text-[#31457f]">
-      <p>Ne place să facem lucrurile clar și simplu, fără compromisuri la calitate.</p>
-      <p class="mt-3">Fie că ai nevoie de sprijin rapid sau de o colaborare pe termen lung, te ajutăm să ajungi la soluția potrivită.</p>
+    <div class="md:pl-3 lg:pl-4">
+      <h2 class="text-3xl font-semibold text-[#15224f]">De ce ai nevoie de o firmă de contabilitate?</h2>
+      <p class="mt-4 text-lg leading-8 text-[#31457f]">{description}</p>
+      <p class="mt-6 max-w-2xl text-base leading-7 text-[#31457f]">
+        Cu sprijinul unor specialiști, scapi de grija termenelor, a amenzilor și a sarcinilor administrative, astfel încât să te poți concentra pe dezvoltarea businessului.
+      </p>
+      <a href="/dececontabilitate" class="mt-8 inline-flex min-w-[180px] justify-center rounded-full bg-[#F8BF16] px-6 py-3 text-sm font-semibold text-[#15224f] transition hover:bg-[#ffca3b]">
+        Descoperă mai mult
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="rounded-3xl border border-[#273A96]/10 bg-gradient-to-br from-[#f4f7ff] to-[#eef4ff] p-8 shadow-[0_16px_40px_rgba(23,37,95,0.06)]">
+  <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between lg:flex-row lg:items-center lg:justify-between">
+    <div class="order-2 max-w-2xl md:order-1">
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[#F8BF16]">Ce ne diferențiază</p>
+      <h3 class="mt-3 text-2xl font-semibold text-[#15224f]">O abordare clară, personalizată și orientată spre rezultate</h3>
+      <p class="mt-4 text-base leading-7 text-[#31457f]">
+        Ne adaptăm nevoilor fiecărui client, oferim consultanță clară și punem accent pe calitate, răspuns rapid și transparență.
+      </p>
+      <a href="/cefacem" class="mt-4 inline-flex min-w-[180px] justify-center rounded-full bg-[#F8BF16] px-6 py-3 text-sm font-semibold text-[#15224f] transition hover:bg-[#ffca3b]">
+        Ce facem diferit?
+      </a>
+    </div>
+    <div class="order-1 flex w-full items-center justify-center overflow-hidden rounded-2xl bg-white/70 shadow-sm md:order-2 md:ml-4 md:w-[38%] md:max-w-[330px] md:flex-shrink-0 lg:ml-4 lg:w-[44%] lg:max-w-[420px] lg:flex-shrink-0">
+      <img src="/src/assets/diploma.jpg" alt="Diplomă" class="h-full w-full object-cover" />
     </div>
   </div>
 </section>
