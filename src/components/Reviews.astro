@@ -1,11 +1,4 @@
 ---
-const MAX_QUOTE_LENGTH = 220;
-
-const getQuotePreview = (quote: string, maxLength = MAX_QUOTE_LENGTH) => {
-  if (quote.length <= maxLength) return quote;
-  return `${quote.slice(0, maxLength).trimEnd()}...`;
-};
-
 const reviews = [
   {
     name: "Administrator F.I. – SC FLORES ",
@@ -33,7 +26,7 @@ const reviews = [
   },
   {
     name: "Gabriela - Lider Consulting Expert",
-    quote: "Colaborarea cu Carmen și echipa sa îmi oferă cel mai important lucru: liniștea. Știu că partea financiar-contabilă a firmei mele este gestionată impecabil, cu responsabilitate și profesionalism. Ori de câte ori apare o provocare sau este nevoie de comunicare cu autoritățile, știu că nu sunt singură. Ea și echipa ei, gasesc întotdeauna soluții. Știu că firma mea este pe mâini bune. “Crede ca poți și ești deja la jumătatea drumului”!!, e motto-ul care o reprezinta perfect! Ceea ce admir cel mai mult este că nu conduce din birou. Carmen este un lider adevărat: lucrează alături de echipa ei, o inspiră și îi transmite aceleași valori – profesionalism, responsabilitate și respect pentru client. Se vede în fiecare om pe care l-a format și în fiecare serviciu pe care îl oferă. Pentru mine, Carmen este mai mult decât un contabil de exceptie. Este un partener de încredere și un om care îți dă siguranța că ești în cele mai bune mâini. O recomand cu toată convingerea. Sunt convinsă că oricine va alege să lucreze cu ea va înțelege foarte repede de ce.",
+    quote: "•	Există oameni pe care îi întâlnești înainte ca ei să-și descopere cu adevărat drumul. Așa am cunoscut-o eu pe Carmen Damaschin. Am încurajat-o să creadă în visul ei, pentru că știam ce fel de profesionist este. Astăzi, privind tot ce a construit, mă bucur că a avut curajul să facă acest pas. Colaborarea cu Carmen și echipa sa îmi oferă cel mai important lucru: liniștea. Știu că partea financiar-contabilă a firmei mele este gestionată impecabil, cu responsabilitate și profesionalism. Ori de câte ori apare o provocare sau este nevoie de comunicare cu autoritățile, știu că nu sunt singură. Ea și echipa ei, gasesc întotdeauna soluții. Știu că firma mea este pe mâini bune. “Crede ca poți și ești deja la jumătatea drumului”!!, e motto-ul care o reprezinta perfect! Ceea ce admir cel mai mult este că nu conduce din birou. Carmen este un lider adevărat: lucrează alături de echipa ei, o inspiră și îi transmite aceleași valori – profesionalism, responsabilitate și respect pentru client. Se vede în fiecare om pe care l-a format și în fiecare serviciu pe care îl oferă. Pentru mine, Carmen este mai mult decât un contabil de exceptie. Este un partener de încredere și un om care îți dă siguranța că ești în cele mai bune mâini. O recomand cu toată convingerea. Sunt convinsă că oricine va alege să lucreze cu ea va înțelege foarte repede de ce.",
   },
   {
     name: "SC GREEN BAGS SOLUTIONS SRL",
@@ -124,18 +117,17 @@ const reviews = [
           <div class="w-full flex-shrink-0 p-6">
             <div class="flex h-full min-h-[220px] flex-col justify-between">
               <div>
-                <p class="text-lg leading-8 text-[#31457f]">"{getQuotePreview(review.quote)}"</p>
-                {review.quote.length > MAX_QUOTE_LENGTH && (
-                  <button
-                    type="button"
-                    class="mt-3 text-sm font-semibold text-[#273A96] underline underline-offset-2 transition hover:text-[#15224f]"
-                    data-read-more
-                    data-full-text={review.quote}
-                    data-review-name={review.name}
-                  >
-                    Citeste tot
-                  </button>
-                )}
+                <p class="text-lg leading-8 text-[#31457f]" data-quote-text data-full-text={review.quote}></p>
+                <button
+                  type="button"
+                  class="mt-3 text-sm font-semibold text-[#273A96] underline underline-offset-2 transition hover:text-[#15224f]"
+                  data-read-more
+                  data-full-text={review.quote}
+                  data-review-name={review.name}
+                  hidden
+                >
+                  Citeste tot
+                </button>
               </div>
               <p class="mt-4 font-semibold text-[#15224f]">{review.name}</p>
             </div>
@@ -196,7 +188,49 @@ const reviews = [
   const modalBody = modal?.querySelector('[data-review-modal-body]');
   const modalTitle = modal?.querySelector('h3');
   const modalClose = modal?.querySelector('[data-review-modal-close]');
+  const quoteElements = Array.from(document.querySelectorAll('[data-quote-text]'));
   const readMoreButtons = Array.from(document.querySelectorAll('[data-read-more]'));
+
+  const getMaxQuoteLength = () => {
+    console.log(window.innerWidth)
+    if (window.innerWidth < 640) return 170;
+    if (window.innerWidth < 740) return 220;
+    if (window.innerWidth < 880) return 290;
+    if (window.innerWidth < 1024) return 340;
+    return 440;
+  };
+
+  const getQuotePreview = (quote: string, maxLength: number) => {
+    if (quote.length <= maxLength) return quote;
+
+    const truncated = quote.slice(0, maxLength).trimEnd();
+    const lastBoundary = Math.max(
+      truncated.lastIndexOf('.'),
+      truncated.lastIndexOf(','),
+      truncated.lastIndexOf('!'),
+      truncated.lastIndexOf('?'),
+      truncated.lastIndexOf(' '),
+    );
+
+    const cutIndex = lastBoundary > 0 ? lastBoundary : truncated.length;
+    return `${truncated.slice(0, cutIndex).trimEnd()}...`;
+  };
+
+  const updateQuotePreviews = () => {
+    const maxLength = getMaxQuoteLength();
+
+    quoteElements.forEach((element) => {
+      const fullText = element.getAttribute('data-full-text') || '';
+      const shouldTruncate = fullText.length > maxLength;
+      const previewText = shouldTruncate ? getQuotePreview(fullText, maxLength) : fullText;
+      const button = element.parentElement?.querySelector('[data-read-more]');
+
+      element.textContent = `"${previewText}"`;
+      if (button) {
+        button.toggleAttribute('hidden', !shouldTruncate);
+      }
+    });
+  };
 
   const openModal = (text: string, name: string) => {
     if (!modal || !modalBody || !modalTitle) return;
@@ -225,6 +259,9 @@ const reviews = [
       }
     });
   });
+
+  updateQuotePreviews();
+  window.addEventListener('resize', updateQuotePreviews);
 
   modalClose?.addEventListener('click', closeModal);
   modal?.addEventListener('click', (event) => {
