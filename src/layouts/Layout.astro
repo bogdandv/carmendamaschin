@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import logo from "../assets/CD3.png";
 const { title } = Astro.props;
 ---
 
@@ -7,8 +8,7 @@ const { title } = Astro.props;
 <html lang="ro">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href={logo.src} />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
